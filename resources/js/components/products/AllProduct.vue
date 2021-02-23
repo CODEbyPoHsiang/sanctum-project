@@ -2,6 +2,14 @@
  <div class="container">
     <div class="row justify-content-center">
       <div class="col-md-8">
+         <center>
+
+           <input type="text" v-model="keywords"  placeholder="請輸入品名">
+        
+          <button type="submit" class="btn btn-primary" @click="fetch">搜尋</button>
+          <button type="submit" class="btn btn-primary" onClick="history.go()">重新整理</button>
+                          </center>
+                          </br>
         <div class="card">
           <div class="card-header">產品清單</div>
 
@@ -40,6 +48,11 @@
         </tr>
       </tbody>
     </table>
+    <center>
+  <tr>
+  {{ errorskeywords }}
+ </tr>
+</center>
           </div>
         </div>
       </div>
@@ -90,12 +103,14 @@
 export default {
   data() {
     return {
+        keywords : null,
       products: [],
+      errorskeywords :"",
     };
   },
   created() {
     axios.get("/sanctum/csrf-cookie").then((response) => {
-      console.log(response.config.headers.Authorization),
+      console.log(`get token : ${response.config.headers.Authorization}`),
         axios.get("api/products").then((response) => {
           this.products = response.data;
         });
@@ -114,6 +129,23 @@ export default {
       });
       }
     },
-  },
+        fetch() {
+              axios.get("/sanctum/csrf-cookie").then((response) => {
+            axios.post('/api/search', {
+            keywords: this.keywords,
+          })
+                .then((response) => {
+            // console.log(response);
+            if (response.request.status === 200) {
+              this.products = response.data;
+              this.errorskeywords = '';
+            } else {
+              this.products = [],
+              this.errorskeywords = response.data.message;
+            }
+            });
+            });
+            }
+            },
 };
 </script>

@@ -1,13 +1,11 @@
 <template>
   <div class="container">
-    <div class="text-center" style="margin: 20px 0px 20px 0px">
-      <a href="https://shouts.dev/" target="_blank"
-        ><img src="https://i.imgur.com/Nt3kJXa.png" /></a
-      ><br />
-      <span class="text-secondary"
-        >Laravel SPA with Vue 3, Auth (Sanctum), CURD Example</span
+    <br/>
+   <center>
+      <span class="text-danger"
+        ><h4>Laravel SPA with Vue , Auth (Sanctum), CURD Example</h4></span
       >
-    </div>
+    </center>
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <div class="collapse navbar-collapse">
@@ -23,7 +21,7 @@
           <router-link to="/about" class="nav-item nav-link"
             >使用者資料</router-link
           >
-          <button type="button" @click="logout">登出</button>
+    <button type="button" class="btn btn-danger" @click="logout">登出</button>
         </div>
         <!-- for non-logged user-->
         <div class="navbar-nav" v-else>

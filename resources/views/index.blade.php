@@ -6,6 +6,8 @@
     <title>Sanctum</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <script src="{{ asset('js/app.js') }}" defer></script>
+            <link rel="stylesheet" href="https://bootswatch.com/4/darkly/bootstrap.css">
+
 </head>
  
 <body>
